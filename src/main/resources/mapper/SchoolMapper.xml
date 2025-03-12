@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.SchoolMapper">
+    <resultMap id="pageCampus" type="com.example.springboot.entity.Campus">
+        <result column="id" property="id" />
+        <result column="campus_name" property="campusName" />
+        <result column="campus_scale" property="campusScale" />
+        <result column="campus_info" property="campusInfo" />
+        <result column="create_time" property="createTime" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <select id="findPageFA" resultMap="pageCampus">
+        select * from campus where status = 0 and campus_name like concat('%', #{campusName} ,'%')
+    </select>
+
+    <select id="findPageFUA" resultMap="pageCampus">
+        select * from campus where status = 2 and campus_name like concat('%', #{campusName} ,'%')
+    </select>
+
+    <select id="findAllDisbind" resultMap="pageCampus">
+        select * from campus right join campus_disband on campus.id = campus_disband.campus_id
+        where campus.campus_name like concat('%', #{campusName} ,'%')
+    </select>
+
+    <select id="findDisbandMember" resultType="com.example.springboot.entity.User">
+        select * from sys_user right join member on sys_user.id =  member.member_id where campus_id =#{cid}
+    </select>
+</mapper>

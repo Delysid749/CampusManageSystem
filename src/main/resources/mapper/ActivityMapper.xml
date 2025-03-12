@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.ActivityMapper">
+    <insert id="moneySubmit">
+        insert into activity_money (activity_id,money_acount,money_use,money_status) values (#{id},#{moneyAcount},#{moneyUse},-1)
+    </insert>
+
+    <select id="findAll" resultType="com.example.springboot.entity.Activity">
+        select * from activity where activity_name like concat ('%', #{activityName} ,'%')
+    </select>
+
+    <select id="findMyActivity" resultType="com.example.springboot.dto.ActivityDTO">
+        select * from activity a left join activity_money am on a.id = am.activity_id where campus_id =#{cid}
+        and activity_name like concat ('%', #{activityName} ,'%')
+    </select>
+
+    <select id="findOneById" resultType="com.example.springboot.entity.Activity">
+        select * from activity where id =#{aid}
+    </select>
+    <select id="moneyManage" resultType="com.example.springboot.dto.ActivityDTO">
+        select * from activity a right join activity_money am on a.id = am.activity_id where activity_name like concat ('%', #{activityName} ,'%')
+    </select>
+</mapper>

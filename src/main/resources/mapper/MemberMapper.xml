@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.MemberMapper">
+
+    <select id="myCampus" resultType="com.example.springboot.entity.Campus">
+        select * from campus left join member on campus.id = member.campus_id where member.member_id = #{uid}
+    </select>
+</mapper>

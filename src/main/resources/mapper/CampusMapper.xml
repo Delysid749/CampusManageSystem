@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.CampusMapper">
+    <resultMap id="pageCampus" type="com.example.springboot.entity.Campus">
+        <result column="id" property="id" />
+        <result column="campus_name" property="campusName" />
+        <result column="campus_scale" property="campusScale" />
+        <result column="campus_info" property="campusInfo" />
+        <result column="create_time" property="createTime" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <resultMap id="pageUser" type="com.example.springboot.entity.User">
+        <result column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="nickname" property="nickname" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="address" property="address" />
+        <result column="create_time" property="createTime" />
+        <result column="role" property="role" />
+    </resultMap>
+
+    <select id="findPage" resultMap="pageCampus">
+        select * from campus where status = 1 and campus_name like concat('%', #{campusName} ,'%')
+
+    </select>
+
+
+
+
+    <select id="myJoinForCampus" resultType="com.example.springboot.entity.Campus">
+        SELECT * from campus LEFT JOIN campus_join on campus.id = campus_join.campus_id where campus_join.user_id =#{userid}
+
+    </select>
+
+    <select id="findMyCFC" resultType="com.example.springboot.entity.Campus">
+        select * from campus where status != 1 and master_id =#{userid}
+    </select>
+
+
+    <select id="findStuForJoin" resultMap="pageUser">
+        select * from sys_user left JOIN campus_join on sys_user.id = campus_join.user_id where campus_join.campus_id =#{campusId}
+    </select>
+
+    <select id="findAllMember" resultMap="pageUser">
+        select * from sys_user left JOIN member on
+            sys_user.id = member.member_id where member.campus_id =#{campusId}
+            and username like concat('%', #{username} ,'%')
+    </select>
+
+    <insert id="createNew">
+        insert into campus(campus_name,campus_scale,campus_info,status,master_name,master_id)
+        values(#{campusName},#{campusScale},#{campusInfo},0,#{masterName},#{userId})
+    </insert>
+</mapper>

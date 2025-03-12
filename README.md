@@ -1,34 +1,87 @@
-# CampusManageSystem
+# 校园社团管理系统
 
-#### 介绍
-社团管理系统
+## 项目介绍
+本项目是一个基于Spring Boot的校园社团管理系统，旨在为高校社团提供全面的管理解决方案。系统采用现代化的技术栈，提供直观的用户界面和丰富的功能，帮助学校和学生更好地管理社团活动。
 
-#### 软件架构
-前端使用Vue+ElementUI，后端使用SpringBoot框架的社团管理系统
 前端项目链接：https://gitee.com/Akaisuici/campus-vue
 
+## 技术栈
+- **后端框架：** Spring Boot 2.5.9
+- **数据库：** MySQL
+- **ORM框架：** MyBatis-Plus 3.5.1
+- **接口文档：** Swagger 3.0.0
+- **安全认证：** JWT (Java-JWT 3.10.3)
+- **缓存：** Redis
+- **工具库：** 
+  - Hutool 5.7.20
+  - Apache POI 4.1.2（Excel处理）
+- **开发工具：** 
+  - Lombok
+  - MyBatis-Plus Generator（代码生成）
 
-#### 主要功能
+## 主要功能
+- 用户管理（学生、管理员）
+- 社团信息管理
+- 活动管理
+- 成员管理
+- 公告管理
+- 数据统计与分析
+- 文件上传下载
 
-1.社团完成活动申请的具体信息并上交
-2.学校完成对活动申请的审核，并反馈结果给社团
-3.社团可以通过系统进行人员管理
-4.社团可以通过系统发布公告
-5.开发留言板块接受游客的意见
+## 环境要求
+- JDK 1.8+
+- MySQL 5.7+
+- Redis
+- Maven 3.6+
 
-#### 参与贡献
+## 快速开始
+1. **克隆项目**
+   ```bash
+   git clone [项目地址]
+   ```
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+2. **配置数据库**
+   - 创建MySQL数据库
+   - 修改 `application.properties` 中的数据库配置
 
+3. **配置Redis**
+   - 确保Redis服务已启动
+   - 修改 `application.properties` 中的Redis配置
 
-#### 特技
+4. **运行项目**
+   ```bash
+   mvn spring-boot:run
+   ```
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+5. **访问接口文档**
+   ```
+   http://localhost:8080/swagger-ui/
+   ```
+
+## 项目结构
+```
+src/
+├── main/
+│   ├── java/
+│   │   └── com/example/
+│   │       ├── config/        // 配置类
+│   │       ├── controller/    // 控制器
+│   │       ├── entity/        // 实体类
+│   │       ├── mapper/        // 数据访问层
+│   │       ├── service/       // 服务层
+│   │       └── utils/         // 工具类
+│   └── resources/
+│       ├── mapper/           // MyBatis映射文件
+│       ├── application.yml   // 应用配置文件
+│       └── application-dev.yml // 开发环境配置
+```
+
+## 特性
+- 基于JWT的身份认证
+- Redis缓存支持
+- 完整的接口文档（Swagger）
+- Excel导入导出
+- 文件上传下载
+- 统一异常处理
+- 跨域支持
+

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * @create 2023-02-02 17:00
  * 社团成员相关接口
  */
+// 社团成员控制器：处理所有与社团成员相关的请求
 @RequestMapping("/member")
 @RestController
 public class MemberController {
@@ -19,8 +20,9 @@ public class MemberController {
 
     /**
      * 申请退出社团
-     * @param uid
-     * @return
+     * @param uid 用户ID
+     * @param cid 社团ID
+     * @return 操作结果
      */
     @PostMapping("/exit")
     public Result exitMyCampus(@RequestParam Integer uid,@RequestParam Integer cid){

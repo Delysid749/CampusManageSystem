@@ -34,6 +34,7 @@ import java.util.List;
  * @author 青哥哥
  * @since 2022-01-26
  */
+// 用户管理控制器：处理所有与用户相关的请求
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -74,7 +75,7 @@ public class UserController {
     }
 
 
-    // 新增或者更新
+    // 新增或更新用户信息
     @PostMapping
     public Result save(@RequestBody User user) {
         if (user.getId() == null && user.getPassword() == null) {  // 新增用户默认密码
@@ -85,8 +86,8 @@ public class UserController {
 
     /**
      * 修改密码
-     * @param userPasswordDTO
-     * @return
+     * @param userPasswordDTO 密码修改信息
+     * @return 操作结果
      */
     @PostMapping("/password")
     public Result password(@RequestBody UserPasswordDTO userPasswordDTO) {
@@ -131,7 +132,7 @@ public class UserController {
     }
 
     /**
-     * 导出接口
+     * 导出用户信息到Excel
      */
     @GetMapping("/export")
     public void export(HttpServletResponse response) throws Exception {

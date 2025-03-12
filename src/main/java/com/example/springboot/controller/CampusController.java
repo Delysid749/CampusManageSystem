@@ -15,6 +15,7 @@ import java.util.List;
  * @author YAO
  * @create 2023-01-13 10:15
  */
+// 社团管理控制器：处理所有与社团相关的请求
 @RestController
 @RequestMapping("/campus")
 public class CampusController {
@@ -27,12 +28,12 @@ public class CampusController {
     @Qualifier("testCam")
     private ICampusService campusService1;
 
+    // 分页查询社团信息
     @GetMapping("/page")
     public Result findPage(@RequestParam Integer pageNum,
                            @RequestParam Integer pageSize,
                            @RequestParam(defaultValue = "") String campusName) {
         return Result.success(campusService.findPage(new Page<>(pageNum, pageSize), campusName));
-
     }
 
     /**
@@ -46,15 +47,16 @@ public class CampusController {
         return Result.success();
     }
 
+    // 更新社团信息
     @PostMapping("/updatecampus")
     public Result updateMyCampus(@RequestBody CampusDTO campusDTO){
         campusService.updateMyCampus(campusDTO);
         return Result.success();
     }
 
+    // 查询我的社团信息
     @GetMapping("/mycampus")
     public Result myCampus(@RequestParam Integer uid){
-
         return Result.success(campusService.findMyCampus(uid));
     }
 
@@ -77,7 +79,6 @@ public class CampusController {
      */
     @PostMapping("/rejectappli")
     public Result rejectApplication(@RequestParam Integer id){
-
         campusService.rejectAppli(id);
         return Result.success();
     }
@@ -113,50 +114,35 @@ public class CampusController {
         }
     }
 
-    /**
-     * 查找我的加入社团申请
-     */
+    // 查询我申请加入的社团列表
     @GetMapping("/mycjoin")
     public Result MyCamJoin(@RequestParam Integer userid){
-
         return Result.success(campusService.myCamJoin(userid));
     }
 
-    /**
-     * 取消加入社团申请
-     */
+    // 取消加入社团申请
     @PostMapping("canceljoin")
     public Result cancelJoinCam(@RequestParam Integer campusId,@RequestParam Integer userId){
         campusService.cancelJoinCam(campusId,userId);
         return Result.success();
     }
 
-    /**
-     * 查找成立社团申请
-     */
+    // 查询我的社团成立申请
     @GetMapping("findmycc")
     public Result findMyCreateForCampus(@RequestParam Integer userid){
         return Result.success(campusService.findMycfc(userid));
     }
 
-    /**
-     * 取消成立社团申请
-     */
+    // 取消社团成立申请
     @PostMapping("cancelcreate")
     public Result cancelCreateCam(@RequestParam Integer campusId,@RequestParam Integer userId){
         campusService.cancelCreateCam(campusId,userId);
         return Result.success();
     }
 
-    /**
-     * 根据id查询社团详情
-     */
+    // 根据ID查询社团详细信息
     @GetMapping("/getOneCampus")
     public Result getOneCampus(@RequestParam Integer cid){
         return Result.success(campusService.getOne(cid));
     }
-
-
-
-
 }

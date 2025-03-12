@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * @author YAO
  * @create 2023-02-03 9:40
  */
+// 学校管理控制器：处理所有与学校管理相关的请求
 @RestController
 @RequestMapping("/school")
 public class SchoolController {
@@ -19,10 +20,10 @@ public class SchoolController {
 
     /**
      * 社团成立申请管理
-     * @param pageNum
-     * @param pageSize
-     * @param campusName
-     * @return
+     * @param pageNum 页码
+     * @param pageSize 每页大小
+     * @param campusName 社团名称（可选）
+     * @return 分页结果
      */
     @GetMapping("/pageforapplication")
     public Result findPageForApplication(@RequestParam Integer pageNum,
@@ -35,10 +36,10 @@ public class SchoolController {
 
     /**
      * 查找审核不通过的社团
-     * @param pageNum
-     * @param pageSize
-     * @param campusName
-     * @return
+     * @param pageNum 页码
+     * @param pageSize 每页大小
+     * @param campusName 社团名称（可选）
+     * @return 分页结果
      */
     @GetMapping("/pageforunapplication")
     public Result findPageForUnApplication(@RequestParam Integer pageNum,
@@ -51,12 +52,12 @@ public class SchoolController {
 
     /**
      * 社团解散管理
-     * @return
+     * @return 分页结果
      */
     @GetMapping("/allDisband")
     public Result disbandManage(@RequestParam Integer pageNum,
                                 @RequestParam Integer pageSize,
-                                @RequestParam(defaultValue = "") String campusName){
+                                @RequestParam(defaultValue = "") String campusName) {
         return Result.success(schoolService.findDisband(new Page<>(pageNum,pageSize),campusName));
     }
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @author YAO
  * @create 2023-03-04 23:31
  */
+// 消息管理控制器：处理所有与社团消息相关的请求
 @RestController
 @RequestMapping("/mes")
 public class MessageController {
@@ -18,12 +19,14 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    // 保存社团消息
     @PostMapping("/saveMess")
     public Result saveMessage(@RequestBody CampusDTO campusDTO){
         messageService.save(campusDTO);
         return Result.success();
     }
 
+    // 分页查询社团消息列表
     @GetMapping("/showMes")
     public Result showMessage(@RequestParam Integer pageNum,
                               @RequestParam Integer pageSize,
